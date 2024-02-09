@@ -9,7 +9,7 @@ spec:
   project: default
   source:
     path: bootstrap/
-    repoURL: https://github.com/akuity-cluster-addons-workshop/control-plane
+    repoURL: https://github.com/it2008018/orgappsetrepo
     directory:
       recurse: true
   syncPolicy:
