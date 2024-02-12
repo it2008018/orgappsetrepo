@@ -1,0 +1,32 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: cluster-apps
+spec:
+  generators:
+  - clusters:
+      selector:
+        matchExpressions:
+        # Don't deploy addons to cluster running Argo CD (i.e. the Akuity Platform).
+        - {key: 'akuity.io/argo-cd-cluster-name', operator: NotIn, values: [in-cluster]}
+
+        # Check annotation to see if addon is enabled.
+        - key: ready
+          operator: In
+          values: ['true']
+  template:
+    metadata:
+      name: 'apps-zuscu-d006-b207-aks-d1-atldp'
+    spec:
+      project: default
+      source:
+        repoURL: https://github.com/it2008018/orgappsetrepo
+        targetRevision: HEAD
+        path: 'clusters/zuscu-d006-b207-aks-d1-atldp/apps'
+        directory:
+          recurse: true
+      destination:
+        name: 'in-cluster'
+        namespace: 'argocd'
+      syncPolicy:
+        automated: {}
