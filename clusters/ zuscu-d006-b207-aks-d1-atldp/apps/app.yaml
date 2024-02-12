@@ -4,7 +4,7 @@ metadata:
   name: guestbook-dev
 spec:
   destination:
-    name: dev
+    name: zuscu-d006-b207-aks-d1-atldp
     namespace: guestbook
   source:
     path: guestbook
