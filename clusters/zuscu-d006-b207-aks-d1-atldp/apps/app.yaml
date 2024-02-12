@@ -1,0 +1,19 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: guestbook-dev
+spec:
+  destination:
+    name: zuscu-d006-b207-aks-d1-atldp
+    namespace: guestbook
+  source:
+    path: guestbook
+    repoURL: 'https://github.com/argoproj/argocd-example-apps/'
+    targetRevision: HEAD
+  project: default
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
+    automated:
+      prune: true
+      selfHeal: true
